@@ -49,8 +49,7 @@ export class LoginComponent implements OnInit {
         this.submitting = true;
         this.cdr.detectChanges();
 
-        this.accountService.login(this.f.email.value, this.f.password.value)
-            .pipe(first())
+this.accountService.login(this.f['email'].value, this.f['password'].value)            .pipe(first())
             .subscribe({
                 next: () => {
                     const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';

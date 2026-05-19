@@ -4,12 +4,16 @@ import { Subscription } from 'rxjs';
 
 import { Alert, AlertType } from '@app/_models';
 import { AlertService } from '@app/_services';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'alert',
     templateUrl: 'alert.component.html',
-    standalone: false
+    standalone: true,
+    imports: [CommonModule]
 })
+
+
 export class AlertComponent implements OnInit, OnDestroy {
     @Input() id = 'default-alert';
     @Input() fade = true;
