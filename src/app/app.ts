@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgClass, NgIf } from '@angular/common';
 
 import { AccountService } from './_services';
@@ -10,7 +10,14 @@ import { AlertComponent } from './_components';
   selector: 'app-root',
   templateUrl: './app.html',
   standalone: true,
-  imports: [RouterOutlet, NgClass, NgIf, AlertComponent]
+  imports: [
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
+    NgClass,
+    NgIf,
+    AlertComponent
+  ]
 })
 export class App {
   Role = Role;
