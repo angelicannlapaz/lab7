@@ -1,7 +1,7 @@
 <div class="app-container" [ngClass]="{ 'bg-light': account }">
 
     <!-- main nav -->
-<nav class="navbar navbar-expand navbar-dark bg-dark px-3">
+<nav class="navbar navbar-expand navbar-dark bg-dark px-3" *ngIf="account">
           <div class="navbar-nav">
 
             <a
@@ -22,7 +22,7 @@
             </a>
 
             <a
-                *ngIf="account.role === Role.Admin"
+                *ngIf="account?.role === Role.Admin"
                 routerLink="/admin"
                 routerLinkActive="active"
                 class="nav-item nav-link"
