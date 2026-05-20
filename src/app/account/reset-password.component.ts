@@ -43,8 +43,9 @@ export class ResetPasswordComponent implements OnInit {
             validator: MustMatch('password', 'confirmPassword')
         });
 
-        const token = this.route.snapshot.queryParams['token'];
-
+const token = decodeURIComponent(
+    this.route.snapshot.queryParams['token']
+);
         if (!token) {
             this.tokenStatus = TokenStatus.Invalid;
             this.cd.detectChanges();
