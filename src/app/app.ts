@@ -1,15 +1,26 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NgClass, NgIf } from '@angular/common';
 
-import { AlertComponent } from './_components/alert.component';
+import { AccountService } from './_services';
+import { Account, Role } from './_models';
+import { AlertComponent } from './_components';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    RouterOutlet,
-    AlertComponent
-  ],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  standalone: true,
+  imports: [RouterOutlet, NgClass, NgIf, AlertComponent]
 })
-export class App {}
+export class App {
+  Role = Role;
+  account?: Account | null;
+
+  constructor(private accountService: AccountService) {
+    this.accountService.account.subscribe(x => this.account = x);
+  }
+
+  logout() {
+    this.accountService.logout();
+  }
+}
