@@ -36,32 +36,35 @@ export class LoginComponent implements OnInit {
         return this.form.controls;
     }
 
-    onSubmit() {
-        this.submitted = true;
-        this.cdr.detectChanges();
+   onSubmit() {
+    this.submitted = true;
+    this.cdr.detectChanges();
+    this.alertService.clear();
 
-        this.alertService.clear();
-
-        if (this.form.invalid) {
-            return;
-        }
-
-        this.submitting = true;
-        this.cdr.detectChanges();
-
-this.accountService.login(this.f['email'].value, this.f['password'].value)            .pipe(first())
-            .subscribe({
-                next: () => {
-                    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-                    this.router.navigateByUrl(returnUrl);
-                },
-                error: error => {
-                    setTimeout(() => {
-                        this.alertService.error(error);
-                        this.submitting = false;
-                        this.cdr.detectChanges();
-                    });
-                }
-            });
+    if (this.form.invalid) {
+        return;
     }
-}
+
+    this.submitting = true;
+    this.cdr.detectChanges();
+
+    console.log('ABOUT TO CALL LOGIN'); // ADD THIS
+
+    this.accountService.login(this.f['email'].value, this.f['password'].value)
+        .pipe(first())
+        .subscribe({
+            next: () => {
+                console.log('LOGIN SUCCESS'); // ADD THIS
+                const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+                this.router.navigateByUrl(returnUrl);
+            },
+            error: error => {
+                console.log('LOGIN ERROR', error); // ADD THIS
+                setTimeout(() => {
+                    this.alertService.error(error);
+                    this.submitting = false;
+                    this.cdr.detectChanges();
+                });
+            }
+        });
+}}
