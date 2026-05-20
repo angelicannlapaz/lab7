@@ -33,15 +33,16 @@ export class AccountService {
         return this.accountSubject.value;
     }
 
-    login(email: string, password: string) {
-        return this.http.post<any>(`${baseUrl}/authenticate`, { email, password }, { withCredentials: true })
-            .pipe(map(account => {
-                localStorage.setItem('account', JSON.stringify(account));
-                this.accountSubject.next(account);
-                this.startRefreshTokenTimer();
-                return account;
-            }));
-    }
+   login(email: string, password: string) {
+    return this.http.post<any>(`${baseUrl}/authenticate`, { email, password }, { withCredentials: true })
+        .pipe(map(account => {
+            console.log('LOGIN RESPONSE:', account); // ADD THIS
+            localStorage.setItem('account', JSON.stringify(account));
+            this.accountSubject.next(account);
+            this.startRefreshTokenTimer();
+            return account;
+        }));
+}
 
     logout() {
         this.http.post<any>(`${baseUrl}/revoke-token`, {}, { withCredentials: true }).subscribe();
