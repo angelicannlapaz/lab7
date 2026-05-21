@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { NgIf, NgClass } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
@@ -16,8 +16,14 @@ export class App {
     Role = Role;
     account?: Account | null;
 
-    constructor(private accountService: AccountService) {
-        this.accountService.account.subscribe(x => this.account = x);
+    constructor(
+        private accountService: AccountService,
+        private cdr: ChangeDetectorRef
+    ) {
+        this.accountService.account.subscribe(x => {
+            this.account = x;
+            this.cdr.detectChanges();
+        });
     }
 
     logout() {
