@@ -72,9 +72,11 @@
 
         <div class="mb-3 form-check">
             <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f['acceptTerms'].errors }" />
+           
             <label for="acceptTerms" class="form-check-label">
-    Accept <a href="/terms" target="_blank">Terms & Conditions</a>
-</label>
+    Accept <a routerLink="/account/terms" target="_blank">Terms & Conditions</a>
+            </label>
+
             <div *ngIf="submitted && f['acceptTerms'].errors" class="invalid-feedback">
                 Accept Ts & Cs is required
             </div>
